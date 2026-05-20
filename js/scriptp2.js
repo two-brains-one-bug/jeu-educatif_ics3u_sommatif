@@ -13,20 +13,14 @@ let score3 = 0;
 var questions = "";
 
 
-/* Je n'étais pas sûr entre avoir des questions individuelles qui cyclent ou le jeu entier, mais les questions 
-individuelles prendront trop de temps et seront seulement implémenté si il y a du temps. Si vous lisez ce
-commentaire, il n'y avait pas de temps */
-
-//Crée une variable qui va décider entre plusieurs options différents pour les questions
-//(chaque option va mener à un questionnaire différent avec les mêmes thèmes mais des questions qui diffèrent.)
+//Mème système que les autres fichiers js, mais avec une équipe de plus
 var questionsChoix = (Math.random() * 10);
-alert(questionsChoix)
+
 
 
 //Premier option des questions
 if (questionsChoix <= 2) {
     
-    alert("Cycle 1 des questions!");
     
     questions = {
 
@@ -288,15 +282,16 @@ else if (questionsChoix > 2 && questionsChoix <= 4) {
         
         html400:{
             titre:"HTML 400",
-            question:" (Avec <>)",
-            reponse:""
+            question:"Balise pour un bouton (Avec <>)",
+            reponse:"<button>"
         },
         
         html500:{
             titre:"HTML 500",
-            question:"Balise pour  (Avec <>)",
-            reponse:""
+            question:"Balise pour un lien relatif (Avec <>, sans contenu du lien)",
+            reponse:"<link rel>"
         },
+        
         
         // CSS
         
@@ -937,8 +932,54 @@ function verifierReponse(){
         document.getElementById("resultat").innerText =
             'Mauvaise réponse! La bonne réponse était "' +
             questions[questionActuelle].reponse + '"';
+            
+            document.getElementById(questionActuelle)
+            .classList.add("used");
+
+            setTimeout(function() {
+            mauvaiseRepSwitch();
+            }, 50);
+            
+            setTimeout(function() {
+                retourPlateau();
+            }, 2000);
+            
+            
+            
+            
+            
+        
     }
 }
+
+
+//Laisse la prochaine équipe répondre même si la réponse était mauvaise (ajouterPoints() sans l'ajout de points)
+function mauvaiseRepSwitch() {
+
+    if(equipeActuelle === 1){
+       
+        equipeActuelle = 2;
+        document.getElementById("tour1").innerText = "";
+        document.getElementById("tour2").innerText = "RÉPOND";
+        document.getElementById("tour3").innerText = "";
+    }
+    else if(equipeActuelle === 2){
+        
+        equipeActuelle = 3;
+        document.getElementById("tour2").innerText = "";
+        document.getElementById("tour3").innerText = "RÉPOND";
+        document.getElementById("tour4").innerText = "";
+    }
+    else if(equipeActuelle === 3){
+       
+        equipeActuelle = 1;
+        document.getElementById("tour3").innerText = "";
+        document.getElementById("tour1").innerText = "RÉPOND";
+        document.getElementById("tour2").innerText = "";
+    }
+   
+}
+
 
 
 //Ajoute les points si la bonne réponse a été soumise
