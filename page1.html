@@ -9,12 +9,12 @@
 <title>Jeopardy</title>
 
 <link rel="stylesheet" href="css/boutons.css">
-
+<!-- fait appele au javascript-->
 <script src="js/script.js"></script>
-        <a href="index.html"> <img src="https://marketplace.canva.com/eGqLY/MAGPH-eGqLY/1/tl/canva-round-house-icon-MAGPH-eGqLY.png" width="30"/></a>
 
+<!--appele le css-->
 <style>
-
+/* fait que tout le text est la bonne couleur, grandeur et allignement*/
 body{
     text-align:center;
     color:#ffcc00;
@@ -24,7 +24,7 @@ body{
 .questionPage{
     display:none;
 }
-
+/*crée une grille avec tout les question*/
 .grille{
 
     display:grid;
@@ -37,7 +37,7 @@ body{
 
     margin:auto;
 }
-
+/* beau text de catégorie*/
 .category{
 
     background:#1a1aff;
@@ -49,7 +49,7 @@ body{
     font-weight:bold;
 }
 
-
+/* fait noircire la boite pour montrer quelle est utilisé*/
 .used{
 
     background:#000000;
@@ -65,14 +65,20 @@ body{
 
 <body style="background-color:#030BA3;">
 
+<!-- Icône de maison pour retourner à l'index -->
+<a href="index.html" style="float: left; margin: 0 15px 10px 0;"> <img src="https://marketplace.canva.com/eGqLY/MAGPH-eGqLY/1/tl/canva-round-house-icon-MAGPH-eGqLY.png" width="30"/></a>
+<br>
+<br>
 <!-- PAGE PLATEAU -->
-
+<!-- donne le nom a la page plateau pour que le id soit utiliser dans la fonction pour revenir au plateau -->
 <div id="pagePlateau">
 
+<center>
 <h1>JEOPARDY</h1>
+</center>
 
 <!-- SCORES -->
-
+<!-- affiche les score de chaque équipes -->
 <div>
 
 <h2>
@@ -106,7 +112,7 @@ RÉPOND
 <div class="grille">
 
 <!-- CATÉGORIES -->
-
+<!-- titre de CATÉGORIES -->
 <div class="category">Science</div>
 <div class="category">Math</div>
 <div class="category">HTML</div>
@@ -114,7 +120,7 @@ RÉPOND
 <div class="category">JavaScript</div>
 
 <!-- 100 -->
-
+<!--boutton pour afficher les question basé sur le bouton cliqué par sujet-->
 <button
 class="button-jeopardy"
 id="science100"
@@ -303,22 +309,22 @@ onclick="ouvrirQuestion('js500',500)">
 </div>
 
 <!-- PAGE QUESTION -->
-
+<!-- donne le id a la page de question pour l'ouvrire avec une fonction -->
 <div id="pageQuestion" class="questionPage">
-
+<!-- cherche le titre de la question -->
 <h2 id="titreQuestion"></h2>
-
+<!-- cherche le text de la question -->
 <div id="texteQuestion"></div>
 
 <br><br>
-
+<!-- crée l'espace pour répondre-->
 <input
 type="text"
 id="reponseUtilisateur"
 placeholder="Écris ta réponse">
 
 <br><br>
-
+<!-- créé le bouton pour vérifié la réponse-->
 <button class="button-jeopardy"onclick="verifierReponse()">
 
 Vérifier la réponse
@@ -330,7 +336,7 @@ Vérifier la réponse
 <div id="resultat"></div>
 
 <br>
-
+<!-- bouton pour revenire au plateau de jeu-->
 <button class="button-jeopardy" onclick="retourPlateau()">
 
 Retour au plateau
