@@ -7,26 +7,25 @@ let equipeActuelle = 1;
 let score1 = 0;
 let score2 = 0;
 
+//W3schools utilisé pour accomplir les setTimeout() https://www.w3schools.com/jsref/met_win_settimeout.asp
+
 
 
 //Chatgpt utilisé pour les questions demandées, cette variable va inclure toutes les questions qui vont être demandées
 var questions = "";
 
 
-/* Je n'étais pas sûr entre avoir des questions individuelles qui cyclent ou le jeu entier, mais les questions 
-individuelles prendront trop de temps et seront seulement implémenté si il y a du temps. Si vous lisez ce
-commentaire, il n'y avait pas de temps */
+/* Chaque cycle de questions apporte le joueur à un plateau de jeu avec des questions différentes mais avec les mêmes thèmes, 
+ce système est facile et des questions supplémentaires peuvent facilement être ajoutés au futur. */
 
 //Crée une variable qui va décider entre plusieurs options différents pour les questions
 //(chaque option va mener à un questionnaire différent avec la mêmes thèmes mais des questions qui diffèrent.)
 var questionsChoix = (Math.random() * 10);
-alert(questionsChoix)
 
 
 //Premier option des questions
 if (questionsChoix <= 2) {
     
-    alert("Cycle 1 des questions!");
     
     questions = {
 
@@ -199,7 +198,11 @@ if (questionsChoix <= 2) {
 //Deuxième cycle de questions
 
 else if (questionsChoix > 2 && questionsChoix <= 4) {
+    
+
     questions = {
+        
+        
 
             // SCIENCE
         
@@ -288,14 +291,14 @@ else if (questionsChoix > 2 && questionsChoix <= 4) {
         
         html400:{
             titre:"HTML 400",
-            question:" (Avec <>)",
-            reponse:""
+            question:"Balise pour un bouton (Avec <>)",
+            reponse:"<button>"
         },
         
         html500:{
             titre:"HTML 500",
-            question:"Balise pour  (Avec <>)",
-            reponse:""
+            question:"Balise pour un lien relatif (Avec <>, sans contenu du lien)",
+            reponse:"<link rel>"
         },
         
         // CSS
@@ -370,6 +373,7 @@ else if (questionsChoix > 2 && questionsChoix <= 4) {
 //Troisième cycle de questions
 
 else if (questionsChoix > 4 && questionsChoix <= 6) {
+
     
     questions = {
 
@@ -395,7 +399,7 @@ science300:{
 
 science400:{
     titre:"Science 400",
-    question:"Quel métal est attiré par un aimant?",
+    question:"Quel est métal le plus commun qui est attiré par un aimant?",
     reponse:"fer"
 },
 
@@ -427,8 +431,8 @@ math300:{
 
 math400:{
     titre:"Math 400",
-    question:"9x = 81, x = ?",
-    reponse:"9"
+    question:"12x = 72, x = ?",
+    reponse:"6"
 },
 
 math500:{
@@ -447,8 +451,8 @@ html100:{
 
 html200:{
     titre:"HTML 200",
-    question:"Balise pour texte important? (Avec <>)",
-    reponse:"<strong>"
+    question:"Balise pour texte en bold? (Avec <>)",
+    reponse:"<b>"
 },
 
 html300:{
@@ -891,6 +895,8 @@ function ouvrirQuestion(id, points){
     pointsActuels = points;
     
     
+    //W3 schools utilisé pour trovuer une méthode efficace de contrôller l'état des styles et leur application
+    //https://www.w3schools.com/jsref/prop_style_display.asp
     document.getElementById("pagePlateau").style.display =
         "none";
 
@@ -936,8 +942,48 @@ function verifierReponse(){
         //Mauvaise réponse :(
         document.getElementById("resultat").innerText =
             "Mauvaise réponse! La bonne réponse était \"" +questions[questionActuelle].reponse + "\"";
+            
+            document.getElementById(questionActuelle)
+            .classList.add("used");
+
+            setTimeout(function() {
+            mauvaiseRepSwitch();
+            }, 50);
+            
+            setTimeout(function() {
+                retourPlateau();
+            }, 2000);
+            
+            
+            
+            
+            
+        
     }
 }
+
+
+//Laisse la prochaine équipe répondre même si la réponse était mauvaise (ajouterPoints() sans l'ajout de points)
+function mauvaiseRepSwitch() {
+
+    if(equipeActuelle === 1){
+       
+        equipeActuelle = 2;
+        document.getElementById("tour1").innerText = "";
+        document.getElementById("tour2").innerText = "RÉPOND";
+        document.getElementById("tour1").innerText = "";
+    }
+    else if(equipeActuelle === 2){
+        
+        equipeActuelle = 1;
+        document.getElementById("tour2").innerText = "";
+        document.getElementById("tour1").innerText = "RÉPOND";
+        document.getElementById("tour2").innerText = "";
+    }
+     
+} 
+
+
 
 
 //Ajoute les points si la bonne réponse a été soumise
