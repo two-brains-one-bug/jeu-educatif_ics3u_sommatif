@@ -31,7 +31,7 @@ if (questionsChoix <= 2) {
 
     // SCIENCE
 
-    science100:{ 
+    science100:{
         titre:"Science 100",
         question:"Quelle planète est rouge?",
         reponse:"mars"
